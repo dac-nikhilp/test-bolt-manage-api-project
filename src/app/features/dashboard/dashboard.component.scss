@@ -1,0 +1,122 @@
+.dashboard {
+  &-header {
+    margin-bottom: 2rem;
+    
+    h1 {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .lead {
+      color: var(--gray-600);
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.card {
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed) ease-in-out;
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid var(--gray-200);
+    padding: var(--spacing-lg);
+    
+    .card-title {
+      color: var(--gray-800);
+      font-weight: 600;
+    }
+  }
+  
+  .card-body {
+    padding: var(--spacing-lg);
+  }
+}
+
+.table {
+  margin-bottom: 0;
+  
+  th {
+    font-weight: 500;
+    color: var(--gray-700);
+    border-top: none;
+  }
+  
+  td {
+    vertical-align: middle;
+  }
+}
+
+.versions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.quick-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: var(--border-radius-md);
+  background-color: white;
+  border: 1px solid var(--gray-200);
+  transition: all var(--transition-speed) ease-in-out;
+  text-decoration: none;
+  color: var(--gray-800);
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    
+    &.primary {
+      background-color: rgba(0, 98, 204, 0.1);
+      color: var(--primary);
+    }
+    
+    &.success {
+      background-color: rgba(32, 201, 151, 0.1);
+      color: var(--secondary);
+    }
+    
+    &.accent {
+      background-color: rgba(253, 126, 20, 0.1);
+      color: var(--accent);
+    }
+    
+    &.info {
+      background-color: rgba(13, 202, 240, 0.1);
+      color: #0dcaf0;
+    }
+  }
+  
+  h5 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+  }
+}

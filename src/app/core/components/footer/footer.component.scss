@@ -1,0 +1,33 @@
+.footer {
+  background-color: white;
+  border-top: 1px solid var(--gray-200);
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.copyright {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: var(--gray-600);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    margin-top: 0.5rem;
+    gap: 1rem;
+  }
+}
