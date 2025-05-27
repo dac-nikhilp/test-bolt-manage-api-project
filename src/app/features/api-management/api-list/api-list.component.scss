@@ -16,56 +16,122 @@
 }
 
 .api-card {
-  height: 100%;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
   
   .card-header {
-    .card-title {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 70%;
-    }
+    padding: 1.5rem;
+    border-bottom: none;
+    background: white;
   }
   
-  .api-description {
-    min-height: 3rem;
-    max-height: 4.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    margin-bottom: 1rem;
-    color: var(--gray-700);
+  .card-body {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .card-footer {
+    padding: 1rem 1.5rem;
+    background: white;
+    border-top: 1px solid #E5E7EB;
   }
 }
 
-.empty-state {
-  text-align: center;
-  padding: 3rem 1rem;
-  background-color: white;
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-sm);
+.api-badge {
+  background: #2563EB;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-block;
+}
+
+.status-badge {
+  background: #10B981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.api-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0;
+  color: #111827;
+}
+
+.api-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.api-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
-  .empty-state-icon {
-    margin-bottom: 1.5rem;
-    color: var(--gray-400);
-  }
-  
-  h4 {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-  
-  p {
-    color: var(--gray-600);
-    max-width: 500px;
-    margin: 0 auto;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
-@media (max-width: 768px) {
-  .page-header {
-    margin-bottom: 1.5rem;
+.api-version {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.api-description {
+  color: #4B5563;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  padding: 0.5rem;
+  color: #6B7280;
+  border: none;
+  background: transparent;
+  
+  &:hover {
+    color: #111827;
   }
+}
+
+.btn-bookmark {
+  padding: 0.5rem;
+  color: #6B7280;
+  border: none;
+  background: transparent;
+  
+  &:hover, &.active {
+    color: #2563EB;
+  }
+  
+  &.active svg {
+    fill: currentColor;
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #F59E0B;
+  font-weight: 500;
 }

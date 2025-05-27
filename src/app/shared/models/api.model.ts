@@ -25,6 +25,8 @@ export interface Api {
   gatewayIds: string[];
   createdAt: Date;
   updatedAt: Date;
+  rating?: number;
+  bookmarked?: boolean;
 }
 
 export interface ApiFormData {
