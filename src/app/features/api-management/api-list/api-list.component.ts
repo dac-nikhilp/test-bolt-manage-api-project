@@ -24,6 +24,10 @@ export class ApiListComponent implements OnInit {
   constructor(private apiService: ApiService) {}
   
   ngOnInit(): void {
+    this.loadApis();
+  }
+
+  loadApis(): void {
     this.apiService.getApis().subscribe(apis => {
       this.apis = apis;
       this.filteredApis = [...apis];
@@ -32,12 +36,10 @@ export class ApiListComponent implements OnInit {
   
   applyFilters(): void {
     this.filteredApis = this.apis.filter(api => {
-      // Apply search filter
       const matchesSearch = !this.searchTerm || 
         api.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         api.description.toLowerCase().includes(this.searchTerm.toLowerCase());
       
-      // Apply visibility filter
       const matchesVisibility = !this.selectedVisibility || 
         api.visibility === this.selectedVisibility;
       
@@ -51,15 +53,26 @@ export class ApiListComponent implements OnInit {
     this.filteredApis = [...this.apis];
   }
   
-  deleteApi(id: string, event: Event): void {
+  deleteApi(id: string): void {
+    if (confirm('Are you sure you want to delete this API?')) {
+      this.apiService.deleteApi(id).subscribe(() => {
+        this.loadApis();
+      });
+    }
+  }
+
+  toggleBookmark(api: Api, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
     
-    if (confirm('Are you sure you want to delete this API?')) {
-      this.apiService.deleteApi(id).subscribe(() => {
-        this.apis = this.apis.filter(api => api.id !== id);
-        this.filteredApis = this.filteredApis.filter(api => api.id !== id);
-      });
-    }
+    this.apiService.toggleBookmark(api.id).subscribe(updatedApi => {
+      if (updatedApi) {
+        const index = this.apis.findIndex(a => a.id === api.id);
+        if (index !== -1) {
+          this.apis[index] = updatedApi;
+          this.applyFilters();
+        }
+      }
+    });
   }
 }

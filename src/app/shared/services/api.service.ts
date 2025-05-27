@@ -44,7 +44,6 @@ export class ApiService {
       updatedAt: new Date('2025-02-28'),
       rating: 4.2
     }
-    // ... rest of the mock APIs
   ];
 
   constructor() { }
@@ -53,5 +52,97 @@ export class ApiService {
     return of([...this.mockApis]).pipe(delay(500));
   }
 
-  // ... rest of the service methods
+  getApiById(id: string): Observable<Api | undefined> {
+    const api = this.mockApis.find(api => api.id === id);
+    return of(api).pipe(delay(300));
+  }
+
+  createApi(apiData: ApiFormData): Observable<Api> {
+    const newId = (this.mockApis.length + 1).toString();
+    const now = new Date();
+    
+    const newApi: Api = {
+      id: newId,
+      name: apiData.name,
+      description: apiData.description,
+      visibility: apiData.visibility,
+      versions: [
+        { id: `${newId}-1`, versionNumber: '1.0', releaseDate: now, deprecated: false }
+      ],
+      contracts: [],
+      gatewayIds: apiData.gatewayIds || [],
+      createdAt: now,
+      updatedAt: now,
+      rating: 0,
+      bookmarked: false
+    };
+    
+    this.mockApis.push(newApi);
+    return of(newApi).pipe(delay(500));
+  }
+
+  updateApi(id: string, apiData: ApiFormData): Observable<Api | undefined> {
+    const index = this.mockApis.findIndex(api => api.id === id);
+    
+    if (index !== -1) {
+      const updatedApi = {
+        ...this.mockApis[index],
+        name: apiData.name,
+        description: apiData.description,
+        visibility: apiData.visibility,
+        gatewayIds: apiData.gatewayIds || this.mockApis[index].gatewayIds,
+        updatedAt: new Date()
+      };
+      
+      this.mockApis[index] = updatedApi;
+      return of(updatedApi).pipe(delay(500));
+    }
+    
+    return of(undefined).pipe(delay(300));
+  }
+
+  deleteApi(id: string): Observable<boolean> {
+    const initialLength = this.mockApis.length;
+    this.mockApis = this.mockApis.filter(api => api.id !== id);
+    return of(initialLength > this.mockApis.length).pipe(delay(500));
+  }
+
+  toggleBookmark(id: string): Observable<Api | undefined> {
+    const api = this.mockApis.find(api => api.id === id);
+    if (api) {
+      api.bookmarked = !api.bookmarked;
+      return of(api).pipe(delay(300));
+    }
+    return of(undefined).pipe(delay(300));
+  }
+
+  updateRating(id: string, rating: number): Observable<Api | undefined> {
+    const api = this.mockApis.find(api => api.id === id);
+    if (api) {
+      api.rating = rating;
+      return of(api).pipe(delay(300));
+    }
+    return of(undefined).pipe(delay(300));
+  }
+
+  uploadContract(apiId: string, file: File, contractType: string): Observable<boolean> {
+    const api = this.mockApis.find(api => api.id === apiId);
+    
+    if (api) {
+      const newContract = {
+        id: `c${Date.now()}`,
+        fileName: file.name,
+        uploadDate: new Date(),
+        fileSize: file.size,
+        contractType
+      };
+      
+      api.contracts.push(newContract);
+      api.updatedAt = new Date();
+      
+      return of(true).pipe(delay(1000));
+    }
+    
+    return of(false).pipe(delay(500));
+  }
 }
